@@ -301,7 +301,7 @@ defmodule Phoenix.ChannelTest do
   """
   def subscribe_and_join(%Socket{} = socket, channel, topic, payload \\ %{})
       when is_atom(channel) and is_binary(topic) and is_map(payload) do
-    socket.endpoint.subscribe(topic)
+    # socket.endpoint.subscribe(topic)
     join(socket, channel, topic, payload)
   end
 
