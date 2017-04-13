@@ -20,12 +20,11 @@ defmodule Phoenix.Endpoint.Server do
   end
 
   defp default(config, otp_app, port) do
-    config =
-      config
-      |> Keyword.put_new(:otp_app, otp_app)
-      |> Keyword.put_new(:port, port)
+    port =  Keyword.get(config, :port, port) |> to_port()
 
-    Keyword.put(config, :port, to_port(config[:port]))
+    :proplists.delete(:port, config)
+      |> Keyword.put_new(:port, port)
+      |> Keyword.put_new(:otp_app, otp_app)
   end
 
   defp to_port(nil), do: raise "server can't start because :port in config is nil, please use a valid port number"
